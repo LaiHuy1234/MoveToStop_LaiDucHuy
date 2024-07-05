@@ -24,7 +24,7 @@ public class RangerAttack : MonoBehaviour
     private void AttackTarget(Collider other)
     {
         Character target = other.GetComponent<Character>();
-        target.Attack();
+        //target.Attack();
     }
 
 

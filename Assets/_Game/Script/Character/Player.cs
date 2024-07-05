@@ -4,48 +4,39 @@ using UnityEngine;
 
 public class Player : Character
 {
-    [SerializeField] private Rigidbody rb;
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed;
+    public bool isMoving = false;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        OnInit();
+    }
+
+    public override void OnInit()
+    {
+        base.OnInit();
     }
 
     private void Update()
     {
-        Move();
+        CheckInput();
     }
 
-
-
-    private void Move()
+    private void CheckInput()
     {
-        // Check Input
-        float horizontal = joystick.Horizontal;
-        float vertical = joystick.Vertical;
-
-        // Convert Vector3
-
-        Vector3 moveDirection = new Vector3(horizontal, 0, vertical);
-
-        if (moveDirection != Vector3.zero)
+        Vector3 direction = Joystick.direct;
+        if (direction.magnitude >= 0.1f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 10f);
-            // Check if the player is on the ground
-            Vector3 nextPoint = transform.position + transform.forward * speed * Time.deltaTime;
-            if (nextPoint != Vector3.zero)
-            {
-                if (CheckGround(nextPoint))
-                {
-                    // If the player is on the ground, move them
-                    rb.MovePosition(nextPoint);
-                }
-            }
+            Move(direction);
         }
-
     }
 
+    public void Move(Vector3 direction)
+    {
+        TF.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), speed * Time.deltaTime);
+        TF.Translate(direction * speed * Time.deltaTime, Space.World);
+        isMoving = true;
+    }
 }
+
