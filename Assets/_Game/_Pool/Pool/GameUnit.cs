@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameUnit : MonoBehaviour
 {
     private Transform tf;
+
     public Transform TF
     {
         get
@@ -19,4 +20,9 @@ public class GameUnit : MonoBehaviour
     }
 
     public PoolType poolType;
+
+    public virtual void OndDespawn()
+    {
+        SimplePool.Despawn(this);
+    }
 }

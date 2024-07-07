@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -157,6 +157,7 @@ Transform:
   m_Children:
   - {fileID: 168255239}
   - {fileID: 400541198}
+  - {fileID: 1539249932}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &10037035
@@ -171,13 +172,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56f3b23f4c071074ab9830e905f6c65c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
+  poolType: 1
+  weaponPrefab: {fileID: 0}
+  attackPoint: {fileID: 1539249932}
+  target: {x: 0, y: 0, z: 0}
   targetList: []
-  rb: {fileID: 10037037}
   joystick: {fileID: 988198660}
   speed: 20
+  isMoving: 0
 --- !u!136 &10037036
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -587,7 +589,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 10037035}
   weaponPrefab: {fileID: 0}
-  target: {x: 0, y: 0, z: 0}
 --- !u!135 &566134170
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1385,9 +1386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b79bae042325a49984c382c5a024ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
+  poolType: 0
+  weaponPrefab: {fileID: 0}
+  attackPoint: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
   targetList: []
 --- !u!136 &1479858992
 CapsuleCollider:
@@ -1562,6 +1564,59 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1517814831}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1539249931
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1539249932}
+  - component: {fileID: 1539249933}
+  m_Layer: 0
+  m_Name: AttackPoin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1539249932
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539249931}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.21, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 10037034}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1539249933
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1539249931}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1720555418
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,7 +1739,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 1479858991}
   weaponPrefab: {fileID: 0}
-  target: {x: 0, y: 0, z: 0}
 --- !u!135 &1786707849
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -144,7 +144,14 @@ public enum ParticleType
 public enum PoolType
 {
     Bot,
-    Brick,
+    Player,
+    Bullet_1,
+    Bullet_2,
+    Bullet_3,
+    Bullet_4,
+    SkinHair_Arrow,
+    SkinHair_Cowboy,
+    SkinHair_Headphone,
 }
 
 

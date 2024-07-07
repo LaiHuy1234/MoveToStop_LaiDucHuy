@@ -6,10 +6,11 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Character : GameUnit
 {
+    [SerializeField] Weapon weaponPrefab;
+    [SerializeField] private Transform attackPoint;
     public Vector3 target;
-
-
     public List<Character> targetList = new List<Character>();
+    
 
     private void Start()
     {
@@ -38,12 +39,15 @@ public class Character : GameUnit
         if (targetList.Count > 0) return;
         {
             Character char1 = targetList[0];
-            char1.transform.position = target;
             if (char1 = null)
             {
                 return;
             }
-            //Weapon weapon = Instantiate();
+            Vector3 direction = (char1.TF.position - TF.position).normalized;
+            TF.rotation = Quaternion.LookRotation(direction);
+            Quaternion spawnRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(-90, 0, 0);
+            Weapon weaponObject = SimplePool.Spawn<Weapon>(weaponPrefab.poolType, attackPoint.position, spawnRotation);
+            weaponObject.SetOwner(this);
         }
     }
 
