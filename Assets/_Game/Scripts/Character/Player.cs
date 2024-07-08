@@ -6,7 +6,7 @@ public class Player : Character
 {
     [SerializeField] private Joystick joystick;
     [SerializeField] private float speed;
-    public bool isMoving = false;
+    public bool IsMoving;
 
     private void Start()
     {
@@ -16,11 +16,21 @@ public class Player : Character
     public override void OnInit()
     {
         base.OnInit();
+
+        // lay id mu khi bang UserDataManager
+        // tu id vu khi lay ra duoc Prefab hoac la kieu weapon tuong ung
+        // tu weapon se spawn weapon
+        CurrentWeapon = SimplePool.Spawn<Weapon>(PoolType.Axe0, WeaponHolder.position, Quaternion.identity);
+        CurrentWeapon.SetOwner(this);
+        CurrentWeapon.TF.SetParent(WeaponHolder);
     }
 
     private void Update()
     {
         CheckInput();
+        IsMoving = CheckIsMoving();
+        if (IsMoving) return;
+            Attack();
     }
 
     private void CheckInput()
@@ -36,7 +46,10 @@ public class Player : Character
     {
         TF.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(direction), speed * Time.deltaTime);
         TF.Translate(direction * speed * Time.deltaTime, Space.World);
-        isMoving = true;
+        IsMoving = true;
     }
+
+    public bool CheckIsMoving() => joystick.Vertical == 0 && joystick.Horizontal == 0;
+
 }
 

@@ -152,6 +152,8 @@ public enum PoolType
     SkinHair_Arrow,
     SkinHair_Cowboy,
     SkinHair_Headphone,
+
+    Axe0,
 }
 
 

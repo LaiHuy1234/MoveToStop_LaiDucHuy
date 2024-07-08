@@ -6,55 +6,51 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Character : GameUnit
 {
-    [SerializeField] Weapon weaponPrefab;
-    [SerializeField] private Transform attackPoint;
-    public Vector3 target;
-    public List<Character> targetList = new List<Character>();
-    
+    public Transform AttackPoint;
+    public Transform WeaponHolder;
+    public Weapon CurrentWeapon;
+    public Vector3 TargetPosition;
+    public List<Character> TargetList = new List<Character>();
 
     private void Start()
     {
         OnInit();
-    }
-    public virtual void OnInit()
-    {
 
     }
+
+    public virtual void OnInit()
+    {
+         
+    }
     //check diem tiep theo co phai ground khong(1: tra ve vi tri tiep theo; 0: tra ve vi tri hien tai)
-    
+
     public void AddTarget(Character target)
     {
-        if (targetList.Contains(target)) return;    
-        targetList.Add(target);
+        if (TargetList.Contains(target)) return;
+        TargetList.Add(target);
     }
 
     public void RemoveTarget(Character target)
     {
-        if (!targetList.Contains(target)) return;
-        targetList.Remove(target);
+        if (!TargetList.Contains(target)) return;
+        TargetList.Remove(target);
     }
 
     public void Attack()
     {
-        if (targetList.Count > 0) return;
+        if (TargetList.Count > 0)
         {
-            Character char1 = targetList[0];
-            if (char1 = null)
-            {
-                return;
-            }
+            Character char1 = TargetList[0];
+            Debug.Log("Da lay gia tri");
             Vector3 direction = (char1.TF.position - TF.position).normalized;
             TF.rotation = Quaternion.LookRotation(direction);
             Quaternion spawnRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(-90, 0, 0);
-            Weapon weaponObject = SimplePool.Spawn<Weapon>(weaponPrefab.poolType, attackPoint.position, spawnRotation);
-            weaponObject.SetOwner(this);
+            CurrentWeapon = SimplePool.Spawn<Weapon>(PoolType.Axe0, WeaponHolder.position, spawnRotation);
+            Debug.Log("Sinh ra riu");
+            CurrentWeapon.SetOwner(this);
+            CurrentWeapon.SetTargetPosition(char1.TF.position);
         }
     }
 
-    public void SetTarget(Vector3 nextPoint)
-    {
-        target = nextPoint;
-    }
 
-    
 }
