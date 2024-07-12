@@ -11,6 +11,10 @@ public class Character : GameUnit
     public Weapon CurrentWeapon;
     public Vector3 TargetPosition;
     public List<Character> TargetList = new List<Character>();
+    public bool IsCanMoving;
+    public bool isDead;
+    public int points;
+
 
     private void Start()
     {
@@ -47,9 +51,13 @@ public class Character : GameUnit
             Quaternion spawnRotation = Quaternion.LookRotation(direction) * Quaternion.Euler(-90, 0, 0);
             CurrentWeapon = SimplePool.Spawn<Weapon>(PoolType.Axe0, WeaponHolder.position, spawnRotation);
             Debug.Log("Sinh ra riu");
-            CurrentWeapon.SetOwner(this);
             CurrentWeapon.SetTargetPosition(char1.TF.position);
         }
+    }
+
+    public void PerformAttack()
+    {
+        Invoke(nameof(Attack), 0.4f);
     }
 
 
