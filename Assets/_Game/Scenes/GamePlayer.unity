@@ -179,7 +179,7 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 0}
   TargetPosition: {x: 0, y: 0, z: 0}
   TargetList: []
-  IsMoving: 0
+  IsCanMoving: 0
   isDead: 0
   points: 0
   joystick: {fileID: 988198660}
@@ -1449,7 +1449,7 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 0}
   TargetPosition: {x: 0, y: 0, z: 0}
   TargetList: []
-  IsMoving: 0
+  IsCanMoving: 0
   isDead: 0
   points: 0
   movementSpeed: 3.5
